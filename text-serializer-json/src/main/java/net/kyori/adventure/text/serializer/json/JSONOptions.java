@@ -44,6 +44,7 @@ public final class JSONOptions {
   private static final int VERSION_1_20_3 = 3679; // 23w40a
   private static final int VERSION_1_20_5 = 3819; // 24w09a
   private static final int VERSION_1_21_4 = 4174; // 24w44a
+  private static final int VERSION_1_21_5 = 4298; // 25w02a
 
   // todo(5.0): move these options out of the global schema
   private static final OptionSchema.Mutable UNSAFE_SCHEMA = OptionSchema.globalSchema();
@@ -56,13 +57,21 @@ public final class JSONOptions {
    * @since 4.15.0
    * @sinceMinecraft 1.16
    */
-  public static final Option<Boolean> EMIT_RGB = UNSAFE_SCHEMA.booleanOption(key("emit/rgb"), true);
+  public static final Option<Boolean> EMIT_RGB = Option.booleanOption(key("emit/rgb"), true);
+
   /**
    * Control how hover event values should be emitted.
    *
    * @since 4.15.0
    */
   public static final Option<HoverEventValueMode> EMIT_HOVER_EVENT_TYPE = UNSAFE_SCHEMA.enumOption(key("emit/hover_value_mode"), HoverEventValueMode.class, HoverEventValueMode.MODERN_ONLY);
+
+  /**
+   * Control how hover event values should be emitted.
+   *
+   * @since 4.15.0
+   */
+  public static final Option<ClickEventValueMode> EMIT_CLICK_EVENT_TYPE = Option.enumOption(key("emit/click_value_mode"), ClickEventValueMode.class, ClickEventValueMode.MODERN_ONLY);
 
   /**
    * Whether to emit text components with no style and no children as plain text.
@@ -148,6 +157,10 @@ public final class JSONOptions {
       VERSION_1_21_4,
       b -> b.value(SHADOW_COLOR_MODE, ShadowColorEmitMode.EMIT_INTEGER)
     )
+    .version(
+      VERSION_1_21_5,
+      b -> b.value(EMIT_HOVER_EVENT_TYPE, HoverEventValueMode.SUPER_MODERN_ONLY)
+    )
     .build();
 
   /**
@@ -207,6 +220,12 @@ public final class JSONOptions {
    */
   public enum HoverEventValueMode {
     /**
+     * Only emit the 1.21.5+ super modern hover events.
+     *
+     * @since 4.20.0
+     */
+    SUPER_MODERN_ONLY,
+    /**
      * Only emit the 1.16+ modern hover events.
      *
      * @since 4.15.0
@@ -219,9 +238,36 @@ public final class JSONOptions {
      */
     LEGACY_ONLY,
     /**
-     * Include both modern and legacy hover event fields, for maximum compatibility.
+     * Include all hover event fields, for maximum compatibility.
      *
      * @since 4.15.0
+     */
+    ALL;
+    public static final @Deprecated HoverEventValueMode BOTH = ALL;
+  }
+
+  /**
+   * Configure how to emit click event values.
+   *
+   * @since 4.20.0
+   */
+  public enum ClickEventValueMode {
+    /**
+     * Only emit the 1.21.5+ modern click events.
+     *
+     * @since 4.20.0
+     */
+    MODERN_ONLY,
+    /**
+     * Only emit the pre-1.21.5 click events.
+     *
+     * @since 4.20.0
+     */
+    LEGACY_ONLY,
+    /**
+     * Include both modern and legacy click event fields, for maximum compatibility.
+     *
+     * @since 4.20.0
      */
     BOTH,
   }
