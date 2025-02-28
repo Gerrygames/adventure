@@ -64,12 +64,12 @@ public final class JSONOptions {
    *
    * @since 4.15.0
    */
-  public static final Option<HoverEventValueMode> EMIT_HOVER_EVENT_TYPE = UNSAFE_SCHEMA.enumOption(key("emit/hover_value_mode"), HoverEventValueMode.class, HoverEventValueMode.MODERN_ONLY);
+  public static final Option<HoverEventValueMode> EMIT_HOVER_EVENT_TYPE = UNSAFE_SCHEMA.enumOption(key("emit/hover_value_mode"), HoverEventValueMode.class, HoverEventValueMode.SUPER_MODERN_ONLY);
 
   /**
-   * Control how hover event values should be emitted.
+   * Control how click event values should be emitted.
    *
-   * @since 4.15.0
+   * @since 4.20.0
    */
   public static final Option<ClickEventValueMode> EMIT_CLICK_EVENT_TYPE = Option.enumOption(key("emit/click_value_mode"), ClickEventValueMode.class, ClickEventValueMode.MODERN_ONLY);
 
@@ -130,6 +130,7 @@ public final class JSONOptions {
     .version(
       VERSION_INITIAL,
       b -> b.value(EMIT_HOVER_EVENT_TYPE, HoverEventValueMode.LEGACY_ONLY)
+        .value(EMIT_CLICK_EVENT_TYPE, ClickEventValueMode.LEGACY_ONLY)
         .value(EMIT_RGB, false)
         .value(EMIT_HOVER_SHOW_ENTITY_ID_AS_INT_ARRAY, false)
         .value(VALIDATE_STRICT_EVENTS, false)
@@ -160,6 +161,7 @@ public final class JSONOptions {
     .version(
       VERSION_1_21_5,
       b -> b.value(EMIT_HOVER_EVENT_TYPE, HoverEventValueMode.SUPER_MODERN_ONLY)
+        .value(EMIT_CLICK_EVENT_TYPE, ClickEventValueMode.MODERN_ONLY)
     )
     .build();
 
@@ -169,7 +171,8 @@ public final class JSONOptions {
    * <p>This may provide a less efficient representation of components, but will not result in information being discarded.</p>
    */
   private static final OptionState MOST_COMPATIBLE = SCHEMA.stateBuilder()
-    .value(EMIT_HOVER_EVENT_TYPE, HoverEventValueMode.BOTH)
+    .value(EMIT_HOVER_EVENT_TYPE, HoverEventValueMode.ALL)
+    .value(EMIT_CLICK_EVENT_TYPE, ClickEventValueMode.BOTH)
     .value(EMIT_HOVER_SHOW_ENTITY_ID_AS_INT_ARRAY, false)
     .value(EMIT_COMPACT_TEXT_COMPONENT, false)
     .value(VALIDATE_STRICT_EVENTS, false)
