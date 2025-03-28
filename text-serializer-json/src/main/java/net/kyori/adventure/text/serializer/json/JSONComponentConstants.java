@@ -53,7 +53,7 @@ public final class JSONComponentConstants {
   public static final String COLOR = "color";
   public static final String SHADOW_COLOR = "shadow_color";
   public static final String INSERTION = "insertion";
-  public static final @Deprecated String CLICK_EVENT = "clickEvent";
+  public static final @Deprecated String CLICK_EVENT_CAMEL = "clickEvent";
   public static final String CLICK_EVENT_SNAKE = "click_event";
   public static final String CLICK_EVENT_ACTION = "action";
   public static final String CLICK_EVENT_VALUE = "value";
@@ -61,7 +61,7 @@ public final class JSONComponentConstants {
   public static final String CLICK_EVENT_PATH = "path";
   public static final String CLICK_EVENT_COMMAND = "command";
   public static final String CLICK_EVENT_PAGE = "page";
-  public static final @Deprecated String HOVER_EVENT = "hoverEvent";
+  public static final @Deprecated String HOVER_EVENT_CAMEL = "hoverEvent";
   public static final String HOVER_EVENT_SNAKE = "hover_event";
   public static final String HOVER_EVENT_ACTION = "action";
   public static final @Deprecated String HOVER_EVENT_CONTENTS = "contents";

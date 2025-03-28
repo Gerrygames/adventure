@@ -64,14 +64,14 @@ public final class JSONOptions {
    *
    * @since 4.15.0
    */
-  public static final Option<HoverEventValueMode> EMIT_HOVER_EVENT_TYPE = UNSAFE_SCHEMA.enumOption(key("emit/hover_value_mode"), HoverEventValueMode.class, HoverEventValueMode.SUPER_MODERN_ONLY);
+  public static final Option<HoverEventValueMode> EMIT_HOVER_EVENT_TYPE = UNSAFE_SCHEMA.enumOption(key("emit/hover_value_mode"), HoverEventValueMode.class, HoverEventValueMode.SNAKE_CASE);
 
   /**
    * Control how click event values should be emitted.
    *
    * @since 4.20.0
    */
-  public static final Option<ClickEventValueMode> EMIT_CLICK_EVENT_TYPE = Option.enumOption(key("emit/click_value_mode"), ClickEventValueMode.class, ClickEventValueMode.MODERN_ONLY);
+  public static final Option<ClickEventValueMode> EMIT_CLICK_EVENT_TYPE = Option.enumOption(key("emit/click_value_mode"), ClickEventValueMode.class, ClickEventValueMode.SNAKE_CASE);
 
   /**
    * Whether to emit text components with no style and no children as plain text.
@@ -129,8 +129,8 @@ public final class JSONOptions {
   private static final OptionState.Versioned BY_DATA_VERSION = SCHEMA.versionedStateBuilder()
     .version(
       VERSION_INITIAL,
-      b -> b.value(EMIT_HOVER_EVENT_TYPE, HoverEventValueMode.LEGACY_ONLY)
-        .value(EMIT_CLICK_EVENT_TYPE, ClickEventValueMode.LEGACY_ONLY)
+      b -> b.value(EMIT_HOVER_EVENT_TYPE, HoverEventValueMode.VALUE_FIELD)
+        .value(EMIT_CLICK_EVENT_TYPE, ClickEventValueMode.CAMEL_CASE)
         .value(EMIT_RGB, false)
         .value(EMIT_HOVER_SHOW_ENTITY_ID_AS_INT_ARRAY, false)
         .value(VALIDATE_STRICT_EVENTS, false)
@@ -140,7 +140,7 @@ public final class JSONOptions {
     )
     .version(
       VERSION_1_16,
-      b -> b.value(EMIT_HOVER_EVENT_TYPE, HoverEventValueMode.MODERN_ONLY)
+      b -> b.value(EMIT_HOVER_EVENT_TYPE, HoverEventValueMode.CAMEL_CASE)
         .value(EMIT_RGB, true)
     )
     .version(
@@ -160,8 +160,8 @@ public final class JSONOptions {
     )
     .version(
       VERSION_1_21_5,
-      b -> b.value(EMIT_HOVER_EVENT_TYPE, HoverEventValueMode.SUPER_MODERN_ONLY)
-        .value(EMIT_CLICK_EVENT_TYPE, ClickEventValueMode.MODERN_ONLY)
+      b -> b.value(EMIT_HOVER_EVENT_TYPE, HoverEventValueMode.SNAKE_CASE)
+        .value(EMIT_CLICK_EVENT_TYPE, ClickEventValueMode.SNAKE_CASE)
     )
     .build();
 
@@ -223,29 +223,41 @@ public final class JSONOptions {
    */
   public enum HoverEventValueMode {
     /**
-     * Only emit the 1.21.5+ super modern hover events.
+     * Only emit the 1.21.5+ hover events using the {@code hover_event} field.
      *
      * @since 4.20.0
      */
-    SUPER_MODERN_ONLY,
+    SNAKE_CASE,
     /**
-     * Only emit the 1.16+ modern hover events.
+     * Only emit the 1.16+ hover events using the {@code hoverEvent} field.
      *
      * @since 4.15.0
      */
-    MODERN_ONLY,
+    CAMEL_CASE,
     /**
      * Only emit the pre-1.16 hover event {@code value} field.
      *
      * @since 4.15.0
      */
-    LEGACY_ONLY,
+    VALUE_FIELD,
     /**
      * Include all hover event fields, for maximum compatibility.
      *
      * @since 4.15.0
      */
     ALL;
+
+    /**
+     * @deprecated use {@link #CAMEL_CASE} instead
+     */
+    public static final @Deprecated HoverEventValueMode MODERN_ONLY = CAMEL_CASE;
+    /**
+     * @deprecated use {@link #VALUE_FIELD} instead
+     */
+    public static final @Deprecated HoverEventValueMode LEGACY_ONLY = VALUE_FIELD;
+    /**
+     * @deprecated use {@link #ALL} instead
+     */
     public static final @Deprecated HoverEventValueMode BOTH = ALL;
   }
 
@@ -256,19 +268,19 @@ public final class JSONOptions {
    */
   public enum ClickEventValueMode {
     /**
-     * Only emit the 1.21.5+ modern click events.
+     * Only emit the 1.21.5+ click events using the {@code click_event} field.
      *
      * @since 4.20.0
      */
-    MODERN_ONLY,
+    SNAKE_CASE,
     /**
-     * Only emit the pre-1.21.5 click events.
+     * Only emit the pre-1.21.5 click events using the {@code clickEvent} field.
      *
      * @since 4.20.0
      */
-    LEGACY_ONLY,
+    CAMEL_CASE,
     /**
-     * Include both modern and legacy click event fields, for maximum compatibility.
+     * Include both camel and snake case click event fields, for maximum compatibility.
      *
      * @since 4.20.0
      */
