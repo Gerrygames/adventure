@@ -90,6 +90,13 @@ public final class JSONOptions {
   public static final Option<Boolean> EMIT_HOVER_SHOW_ENTITY_ID_AS_INT_ARRAY = UNSAFE_SCHEMA.booleanOption(key("emit/hover_show_entity_id_as_int_array"), true);
 
   /**
+   * Whether to emit the hover event show entity action's entity type key as a {@code type} and UUID as an {@code id}, as it was before 1.21.5.
+   *
+   * @since 4.20.0
+   */
+  public static final Option<Boolean> EMIT_HOVER_SHOW_ENTITY_KEY_AS_TYPE_AND_UUID_AS_ID = UNSAFE_SCHEMA.booleanOption(key("emit/hover_show_entity_key_as_type_and_uuid_as_id"), false);
+
+  /**
    * Whether to be strict about accepting invalid hover/click events.
    *
    * <p>When enabled, this matches Vanilla as of 1.20.3.</p>
@@ -133,6 +140,7 @@ public final class JSONOptions {
         .value(EMIT_CLICK_EVENT_TYPE, ClickEventValueMode.CAMEL_CASE)
         .value(EMIT_RGB, false)
         .value(EMIT_HOVER_SHOW_ENTITY_ID_AS_INT_ARRAY, false)
+        .value(EMIT_HOVER_SHOW_ENTITY_KEY_AS_TYPE_AND_UUID_AS_ID, true)
         .value(VALIDATE_STRICT_EVENTS, false)
         .value(EMIT_DEFAULT_ITEM_HOVER_QUANTITY, false)
         .value(SHOW_ITEM_HOVER_DATA_MODE, ShowItemHoverDataMode.EMIT_LEGACY_NBT)
@@ -162,6 +170,7 @@ public final class JSONOptions {
       VERSION_1_21_5,
       b -> b.value(EMIT_HOVER_EVENT_TYPE, HoverEventValueMode.SNAKE_CASE)
         .value(EMIT_CLICK_EVENT_TYPE, ClickEventValueMode.SNAKE_CASE)
+        .value(EMIT_HOVER_SHOW_ENTITY_KEY_AS_TYPE_AND_UUID_AS_ID, false)
     )
     .build();
 
