@@ -50,8 +50,8 @@ import net.kyori.adventure.util.Codec;
 import net.kyori.option.OptionState;
 import org.jetbrains.annotations.Nullable;
 
-import static net.kyori.adventure.text.serializer.json.JSONComponentConstants.CLICK_EVENT_CAMEL;
 import static net.kyori.adventure.text.serializer.json.JSONComponentConstants.CLICK_EVENT_ACTION;
+import static net.kyori.adventure.text.serializer.json.JSONComponentConstants.CLICK_EVENT_CAMEL;
 import static net.kyori.adventure.text.serializer.json.JSONComponentConstants.CLICK_EVENT_COMMAND;
 import static net.kyori.adventure.text.serializer.json.JSONComponentConstants.CLICK_EVENT_PAGE;
 import static net.kyori.adventure.text.serializer.json.JSONComponentConstants.CLICK_EVENT_PATH;
@@ -60,8 +60,8 @@ import static net.kyori.adventure.text.serializer.json.JSONComponentConstants.CL
 import static net.kyori.adventure.text.serializer.json.JSONComponentConstants.CLICK_EVENT_VALUE;
 import static net.kyori.adventure.text.serializer.json.JSONComponentConstants.COLOR;
 import static net.kyori.adventure.text.serializer.json.JSONComponentConstants.FONT;
-import static net.kyori.adventure.text.serializer.json.JSONComponentConstants.HOVER_EVENT_CAMEL;
 import static net.kyori.adventure.text.serializer.json.JSONComponentConstants.HOVER_EVENT_ACTION;
+import static net.kyori.adventure.text.serializer.json.JSONComponentConstants.HOVER_EVENT_CAMEL;
 import static net.kyori.adventure.text.serializer.json.JSONComponentConstants.HOVER_EVENT_CONTENTS;
 import static net.kyori.adventure.text.serializer.json.JSONComponentConstants.HOVER_EVENT_SNAKE;
 import static net.kyori.adventure.text.serializer.json.JSONComponentConstants.HOVER_EVENT_VALUE;

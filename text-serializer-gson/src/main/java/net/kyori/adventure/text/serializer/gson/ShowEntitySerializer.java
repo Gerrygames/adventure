@@ -43,14 +43,14 @@ import static net.kyori.adventure.text.serializer.json.JSONComponentConstants.SH
 import static net.kyori.adventure.text.serializer.json.JSONComponentConstants.SHOW_ENTITY_UUID;
 
 final class ShowEntitySerializer extends TypeAdapter<HoverEvent.ShowEntity> {
-  static TypeAdapter<HoverEvent.ShowEntity> create(final Gson gson, OptionState opt) {
+  static TypeAdapter<HoverEvent.ShowEntity> create(final Gson gson, final OptionState opt) {
     return new ShowEntitySerializer(gson, opt.value(JSONOptions.EMIT_HOVER_SHOW_ENTITY_KEY_AS_TYPE_AND_UUID_AS_ID)).nullSafe();
   }
 
   private final Gson gson;
   private final boolean emitKeyAsTypeAndUuidAsId;
 
-  private ShowEntitySerializer(final Gson gson, boolean emitKeyAsTypeAndUuidAsId) {
+  private ShowEntitySerializer(final Gson gson, final boolean emitKeyAsTypeAndUuidAsId) {
     this.gson = gson;
     this.emitKeyAsTypeAndUuidAsId = emitKeyAsTypeAndUuidAsId;
   }
