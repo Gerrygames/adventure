@@ -334,7 +334,12 @@ final class StyleSerializer extends TypeAdapter<Style> {
         } else {
           out.name(CLICK_EVENT_VALUE);
         }
-        out.value(clickEvent.value());
+
+        if (action == ClickEvent.Action.CHANGE_PAGE) {
+          out.value(Integer.parseInt(clickEvent.value()));
+        } else {
+          out.value(clickEvent.value());
+        }
         out.endObject();
       }
 
