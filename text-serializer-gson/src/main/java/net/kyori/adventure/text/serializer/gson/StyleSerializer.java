@@ -337,6 +337,12 @@ final class StyleSerializer extends TypeAdapter<Style> {
 
         if (action == ClickEvent.Action.CHANGE_PAGE) {
           out.value(Integer.parseInt(clickEvent.value()));
+        } else if (action == ClickEvent.Action.OPEN_URL) {
+          if (clickEvent.value().startsWith("http://") || clickEvent.value().startsWith("https://")) {
+            out.value(clickEvent.value());
+          } else {
+            out.value("https://" + clickEvent.value());
+          }
         } else {
           out.value(clickEvent.value());
         }
